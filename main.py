@@ -1,5 +1,5 @@
 from stats import sorted_list, count_chars, count_text
-
+import sys
 
 
 def get_book_text(file_path):
@@ -7,11 +7,17 @@ def get_book_text(file_path):
         file_contents = f.read()
     return file_contents
 
+def get_path():
+    try:
+        return sys.argv[1]
+    except Exception:
+        return "Usage: python3 main.py <path_to_book>"
+
 
 def main():
-    path = "./books/frankenstein.txt"
+    path = get_path()
     words = count_text(get_book_text(path))     # returns word count of from get_book_text
-    chars = count_chars(get_book_text(path))    # returns dict {letter: times_occured}
+    # chars = count_chars(get_book_text(path))    # returns dict {letter: times_occured}
     lst =  sorted_list(count_chars(get_book_text(path)))
     print("============ BOOKBOT ============")
     print(f"Analyzing book found at {path}...")
